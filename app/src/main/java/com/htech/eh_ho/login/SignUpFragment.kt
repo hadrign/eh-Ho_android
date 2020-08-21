@@ -32,17 +32,35 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buttonSignUp.setOnClickListener {
-            val model = SignUpModel(
-                inputUsername.text.toString(),
-                inputEmail.text.toString(),
-                inputPassword.text.toString()
-            )
-            signUpInteractionListener?.onSignUp(model)
+            if (isFormValid()) {
+                val model = SignUpModel(
+                    inputUsername.text.toString(),
+                    inputEmail.text.toString(),
+                    inputPassword.text.toString()
+                )
+                signUpInteractionListener?.onSignUp(model)
+            } else {
+                showErrors()
+            }
         }
         labelReturnSignIn.setOnClickListener {
             signUpInteractionListener?.onGoToSignIn()
         }
     }
+
+    private fun showErrors() {
+        if (inputEmail.text.isEmpty())
+            inputEmail.error = getString(R.string.error_empty)
+        if (inputUsername.text.isEmpty())
+            inputUsername.error = getString(R.string.error_empty)
+        if (inputPassword.text.isEmpty())
+            inputPassword.error = getString(R.string.error_empty)
+        if (inputConfirmPassword.text.isEmpty())
+            inputConfirmPassword.error = getString(R.string.error_empty)
+        if (!inputPassword.text.toString().equals(inputConfirmPassword.text.toString()))
+            inputConfirmPassword.error = getString(R.string.error_not_same_password)
+    }
+
     override fun onDetach() {
         super.onDetach()
         this.signUpInteractionListener = null
@@ -51,4 +69,10 @@ class SignUpFragment : Fragment() {
         fun onGoToSignIn()
         fun onSignUp(signUpModel: SignUpModel)
     }
+
+    private fun isFormValid() = inputEmail.text.isNotEmpty()
+            && inputUsername.text.isNotEmpty()
+            && inputPassword.text.isNotEmpty()
+            && inputConfirmPassword.text.isNotEmpty()
+            && inputPassword.text.toString().equals(inputConfirmPassword.text.toString())
 }

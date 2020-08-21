@@ -39,12 +39,24 @@ class SignInFragment: Fragment() {
             signInInteractionListener?.onGoToSignUp()
         }
         buttonLogin.setOnClickListener {
-            val signInModel = SignInModel(
-                inputUsername.text.toString(),
-                inputPassword.text.toString()
-            )
-            signInInteractionListener?.onSignIn(signInModel)
+            if (isFormValid()) {
+                val signInModel = SignInModel(
+                    inputUsername.text.toString(),
+                    inputPassword.text.toString()
+                )
+                signInInteractionListener?.onSignIn(signInModel)
+            } else {
+                showErrors()
+            }
         }
+    }
+
+    private fun showErrors() {
+        if (inputUsername.text.isEmpty())
+            inputUsername.error = getString(R.string.error_empty)
+        if (inputPassword.text.isEmpty())
+            inputPassword.error = getString(R.string.error_empty)
+
     }
 
     override fun onDetach() {
@@ -56,5 +68,7 @@ class SignInFragment: Fragment() {
         fun onGoToSignUp()
         fun onSignIn(signInModel: SignInModel)
     }
+
+    private fun isFormValid() = inputUsername.text.isNotEmpty() && inputPassword.text.isNotEmpty()
 
 }
