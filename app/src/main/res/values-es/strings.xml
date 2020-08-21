@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">eh-Ho</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Accede</string>
+    <string name="minutes_zero">Justo ahora</string>
+    <string name="label_loading">Loading</string>
+</resources>
