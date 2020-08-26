@@ -21,4 +21,9 @@
         android:layout_marginBottom="32dp"
         app:srcCompat="@drawable/ic_add"/>
 
+    <include
+        android:id="@+id/viewLoading"
+        layout="@layout/view_loading"
+        android:visibility="invisible"/>
+
 </FrameLayout>
