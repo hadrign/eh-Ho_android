@@ -58,6 +58,11 @@ class TopicsFragment : Fragment() {
         buttonRetry.setOnClickListener {
             this.loadTopics()
         }
+
+        swipeRefresh.setOnRefreshListener {
+            this.loadTopics()
+            swipeRefresh.isRefreshing = false
+        }
         topicsAdapter.setTopics(TopicsRepo.topics)
 
         listTopics.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -108,7 +113,6 @@ class TopicsFragment : Fragment() {
                 {
                     enableLoading(false)
                     enableRetry()
-                    //TODO: Manejo de errores
                 }
             )
         }
