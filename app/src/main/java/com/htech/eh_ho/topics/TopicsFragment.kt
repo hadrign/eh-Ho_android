@@ -13,6 +13,7 @@ import com.htech.eh_ho.inflate
 import kotlinx.android.synthetic.main.fragment_topics.*
 import kotlinx.android.synthetic.main.fragment_topics.viewLoading
 import kotlinx.android.synthetic.main.login_main.*
+import kotlinx.android.synthetic.main.view_retry.*
 import java.lang.IllegalArgumentException
 
 class TopicsFragment : Fragment() {
@@ -53,6 +54,10 @@ class TopicsFragment : Fragment() {
         buttonCreate.setOnClickListener {
             this.topicsInteractionListener?.onCreateTopic()
         }
+
+        buttonRetry.setOnClickListener {
+            this.loadTopics()
+        }
         topicsAdapter.setTopics(TopicsRepo.topics)
 
         listTopics.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -81,8 +86,19 @@ class TopicsFragment : Fragment() {
         }
     }
 
+    private fun enableRetry(enabled: Boolean = true) {
+        if (enabled) {
+            this.listTopics.visibility = View.INVISIBLE
+            viewRetry.visibility = View.VISIBLE
+        } else {
+            this.listTopics.visibility = View.VISIBLE
+            viewRetry.visibility = View.INVISIBLE
+        }
+    }
+
     private fun loadTopics() {
         enableLoading()
+        enableRetry(false)
         context?.let {
             TopicsRepo.getTopics(it.applicationContext,
                 {
@@ -91,6 +107,7 @@ class TopicsFragment : Fragment() {
                 },
                 {
                     enableLoading(false)
+                    enableRetry()
                     //TODO: Manejo de errores
                 }
             )

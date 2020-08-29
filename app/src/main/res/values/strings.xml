@@ -48,4 +48,6 @@
     <string name="error_duplicated_topic">Title has been already used</string>
     <string name="label_creating_topic">Creating topic</string>
     <string name="error_not_same_password">Passwords must match</string>
+    <string name="something_bad">Ooops something bad happened</string>
+    <string name="label_retry">RETRY</string>
 </resources>

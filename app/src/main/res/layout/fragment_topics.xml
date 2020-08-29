@@ -26,4 +26,9 @@
         layout="@layout/view_loading"
         android:visibility="invisible"/>
 
+    <include
+        android:id="@+id/viewRetry"
+        layout="@layout/view_retry"
+        android:visibility="invisible"/>
+
 </FrameLayout>
