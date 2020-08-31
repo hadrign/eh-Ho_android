@@ -3,9 +3,11 @@ package com.htech.eh_ho.topics
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.htech.eh_ho.R
 import com.htech.eh_ho.data.Topic
 import com.htech.eh_ho.data.TopicsRepo
@@ -63,6 +65,18 @@ class TopicsFragment : Fragment() {
             this.loadTopics()
             swipeRefresh.isRefreshing = false
         }
+
+        listTopics.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0 && buttonCreate.isVisible) {
+                    buttonCreate.hide()
+                } else if (dy < 0 && !buttonCreate.isVisible) {
+                    buttonCreate.show()
+                }
+            }
+        })
+        
         topicsAdapter.setTopics(TopicsRepo.topics)
 
         listTopics.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
