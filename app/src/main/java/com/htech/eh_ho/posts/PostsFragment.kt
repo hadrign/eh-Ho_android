@@ -71,7 +71,7 @@ class PostsFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_topics, menu)
+        inflater.inflate(R.menu.menu_create_post, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
