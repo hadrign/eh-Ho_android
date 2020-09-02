@@ -31,4 +31,15 @@ data class CreateTopicModel(
     }
 }
 
+data class CreatePostModel(
+    val topicsID: String,
+    val content: String
+) {
+    fun toJson(): JSONObject{
+        return JSONObject()
+            .put("topic_id", topicsID)
+            .put("raw", content)
+    }
+}
+
 data class GetPostFromTopicModel(val topicsID: String)

@@ -55,4 +55,6 @@
     <string name="title_date">"Date: "</string>
     <string name="hint_date">Date</string>
     <string name="lable_addPost">Add post</string>
+    <string name="hint_Topic">Topic</string>
+    <string name="topic_id">Topic ID: </string>
 </resources>

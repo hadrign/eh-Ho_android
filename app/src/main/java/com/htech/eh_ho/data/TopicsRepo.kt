@@ -109,6 +109,44 @@ object TopicsRepo {
         ApiRequestQueue.getRequestQueue(context).add(request)
     }
 
+    fun addPost(
+        context: Context,
+        model: CreatePostModel,
+        onSuccess: (CreatePostModel) -> Unit,
+        onError: (RequestError) -> Unit
+    ){
+        val username = UserRepo.getUsername(context)
+        val request = PostRequest(
+            Request.Method.POST,
+            ApiRoutes.createTopic(),
+            model.toJson(),
+            {
+                onSuccess(model)
+            },
+            {
+                it.printStackTrace()
+                val requestError = if (it is ServerError && it.networkResponse.statusCode == 422){
+                    val body = String(it.networkResponse.data, Charsets.UTF_8)
+                    val jsonError = JSONObject(body)
+                    val errors = jsonError.getJSONArray("errors")
+                    var errorMessage = ""
+                    for (i in 0 until errors.length()) {
+                        errorMessage += "${errors[i]} "
+                    }
+                    RequestError(it, message = errorMessage)
+                } else if (it is NetworkError)
+                    RequestError(it, messageResId = R.string.error_not_internet)
+                else
+                    RequestError(it)
+
+                onError(requestError)
+            },
+            username
+        )
+        ApiRequestQueue.getRequestQueue(context).add(request)
+
+    }
+
     fun  createDummyTopics(count: Int = 20): List<Topic> {
         /*val dummies = mutableListOf<Topic>()
 

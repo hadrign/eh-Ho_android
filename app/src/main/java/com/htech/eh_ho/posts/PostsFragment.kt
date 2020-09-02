@@ -77,7 +77,6 @@ class PostsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("PostsFragment", "******** topicIDFromActivity:  ${topicIDFromActivity}")
         val topicIDModel = GetPostFromTopicModel (
         topicIDFromActivity
         )
@@ -102,7 +101,7 @@ class PostsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            //R.id.action_logout -> this.topicsInteractionListener?.onLogout()
+            R.id.action_create -> this.postsInteractionListener?.onCreatePost()
 
         }
         return super.onOptionsItemSelected(item)
