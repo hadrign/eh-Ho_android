@@ -10,6 +10,7 @@ import org.json.JSONObject
 
 object TopicsRepo {
     val topics: MutableList<Topic> = mutableListOf()
+    val posts: MutableList<Post> = mutableListOf()
 
     fun getTopics(
         context: Context,
@@ -42,7 +43,7 @@ object TopicsRepo {
         return  field
     }*/
 
-    fun getTopic(id: String): Topic? = topics.find { it.id == id }
+    //fun getTopic(id: String): Topic? = topics.find { it.id == id }
 
     fun addTopic(
         context: Context,
@@ -77,6 +78,33 @@ object TopicsRepo {
                 onError(requestError)
             },
             username
+        )
+        ApiRequestQueue.getRequestQueue(context).add(request)
+    }
+
+    fun getPosts(
+        context: Context,
+        getPostsModel: GetPostFromTopicModel,
+        onSuccess: (List<Post>) -> Unit,
+        onError: (RequestError) -> Unit
+    ){
+        val request = JsonObjectRequest(
+            Request.Method.GET,
+            ApiRoutes.getPosts(getPostsModel.topicsID),
+            null,
+            {
+                val list = Post.parsePostsList(it)
+                onSuccess(list)
+            },
+            {
+                it.printStackTrace()
+                val requestError =
+                    if (it is NetworkError)
+                        RequestError(it, messageResId = R.string.error_not_internet)
+                    else
+                        RequestError(it)
+                onError(requestError)
+            }
         )
         ApiRequestQueue.getRequestQueue(context).add(request)
     }

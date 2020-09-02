@@ -21,6 +21,13 @@ object ApiRoutes {
     fun createTopic() =
         uriBuilder().appendPath("posts.json").build().toString()
 
+    fun getPosts(topicID: String) =
+        uriBuilder()
+            .appendEncodedPath("t")
+            .appendPath("${topicID}.json")
+            .build()
+            .toString()
+
     private fun uriBuilder() =
         Uri.Builder()
             .scheme("https")

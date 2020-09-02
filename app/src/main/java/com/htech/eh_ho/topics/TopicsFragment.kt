@@ -20,7 +20,7 @@ import java.lang.IllegalArgumentException
 
 class TopicsFragment : Fragment() {
 
-    var topicsInteractionListener: TopicsInteractionListener? =null
+    var topicsInteractionListener: TopicsInteractionListener? = null
 
     private val topicsAdapter: TopicsAdapter by lazy {
         val adapter = TopicsAdapter {
@@ -76,7 +76,7 @@ class TopicsFragment : Fragment() {
                 }
             }
         })
-        
+
         topicsAdapter.setTopics(TopicsRepo.topics)
 
         listTopics.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

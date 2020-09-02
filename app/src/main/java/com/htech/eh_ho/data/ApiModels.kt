@@ -30,3 +30,5 @@ data class CreateTopicModel(
             .put("raw", content)
     }
 }
+
+data class GetPostFromTopicModel(val topicsID: String)

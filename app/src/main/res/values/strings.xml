@@ -50,4 +50,8 @@
     <string name="error_not_same_password">Passwords must match</string>
     <string name="something_bad">Ooops something bad happened</string>
     <string name="label_retry">RETRY</string>
+    <string name="title_author">Author:</string>
+    <string name="title_content">Content:</string>
+    <string name="title_date">"Date: "</string>
+    <string name="hint_date">Date</string>
 </resources>

@@ -7,6 +7,8 @@ import com.htech.eh_ho.*
 import com.htech.eh_ho.data.Topic
 import com.htech.eh_ho.data.UserRepo
 import com.htech.eh_ho.login.LoginActivity
+import com.htech.eh_ho.posts.EXTRA_TOPIC_ID
+import com.htech.eh_ho.posts.PostActivity
 
 const val TRANSATION_CREATE_TOPIC = "create_topic"
 class TopicsActivity: AppCompatActivity(), TopicsFragment.TopicsInteractionListener, CreateTopicsfragment.CreateTopicInteractionListener {
